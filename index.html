@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Valderandom</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 </head>
 <body>
     <h1 class="title">Você pode chamar ele de, <span class="name"></span></h1>
@@ -12,7 +18,18 @@
 
     <script>
         (async () => {
-            const names = await fetch('./names.json')
+          const applyNameToElement = name => {
+            const element = document.querySelector('.name')
+            element.textContent = name
+          }
+          
+          const getRandomNameOfArray = array => {
+            return array[Math.floor(Math.random() * array.length)]
+          }
+
+          fetch('names.json')
+            .then(respose => respose.json())
+            .then(result => applyNameToElement(getRandomNameOfArray(result.names)))
         })()
     </script>
 </body>
